@@ -1,14 +1,15 @@
-const { default: mongoose } = require("mongoose")
+const mongoose = require('mongoose'), Schema = mongoose.Schema;
+const UserModel = require('./Users');
 
 const DeliverySchema = new mongoose.Schema({
     date: {
         type: Date,
-        required: true
+        required: false
     },
 
     time: {
-        type: time,
-        required: true
+        type: String,
+        required: false
     },
 
     destination: {
@@ -23,13 +24,18 @@ const DeliverySchema = new mongoose.Schema({
 
     status: {
         type: String,
-        required: true
+        required: false
     },
 
     packinghelp: {
         type: Boolean,
+        required: false
+    },
+    user: {
+        type: Schema.Types.ObjectId,
         required: true
     }
-})
+});
 
-module.exports = mongoose.model("Delivery", DeliverySchema);
+const DeliveryModel = mongoose.model("deliveries", DeliverySchema)
+module.exports = DeliveryModel

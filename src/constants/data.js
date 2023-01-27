@@ -1,4 +1,7 @@
 import images from "./images"
+import DataFeed from "./DataFeed"
+
+
 
 const data = {
     user: {
@@ -9,25 +12,25 @@ const data = {
         {
             title: 'Sales',
             subtitle: 'Total sales today',
-            value: '$1.000',
+            value: '',
             percent: 70
         },
         {
             title: 'Orders',
             subtitle: 'Total orders today',
-            value: '3000',
+            value: '',
             percent: 49
         },
         {
             title: 'Revenue',
             subtitle: 'Total revenue today',
-            value: '$678',
+            value: '',
             percent: 38
         },
         {
             title: 'Visits',
             subtitle: 'Total visits today',
-            value: '2345',
+            value: '',
             percent: 55
         }
     ],
@@ -41,11 +44,11 @@ const data = {
     },
     overall: [
         {
-            value: '300K',
+            value: '',
             title: 'Orders'
         },
         {
-            value: '9.876K',
+            value: '9.877K',
             title: 'Customers'
         },
         {

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './summary-box.scss'
 import Box from '../box/Box'
+import Axios from "axios"
+import { data } from '../../constants'
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar'
 import { colors } from '../../constants'
 import { Line } from 'react-chartjs-2'
@@ -26,17 +28,34 @@ ChartJS.register(
 )
 
 const SummaryBox = ({ item }) => {
+    const [overAllData,setOverAll]=useState(data);
+    useEffect(() => {
+            Axios.get("http://localhost:3001/getDelivery").then((response) => {
+                let newData=overAllData.overall.map((item)=>{
+                    if(item.title=='Orders'){
+                        item.value=response.data.length
+                    }
+                    return item;
+                })
+                setOverAll({overall:newData});
+            })
+            // Axios.get("http://localhost:3001/overalll").then((response) => {
+            //     setOverAll(response.data);
+            // })
+    },[])
+
     return (
         <Box>
+            
             <div className='summary-box'>
                 <div className="summary-box__info">
                     <div className="summary-box__info__title">
                         <div>{item.title}</div>
                         <span>{item.subtitle}</span>
                     </div>
-                    <div className="summary-box__info__value">
-                        {item.value}
-                    </div>
+                        <div className="summary-box__info__value">
+                            {item.value}
+                        </div>
                 </div>
                 <div className="summary-box__chart">
                     <CircularProgressbarWithChildren

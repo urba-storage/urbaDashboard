@@ -4,6 +4,7 @@ const app = express()
 //connect mongoose
 const mongoose = require('mongoose')
 const UserModel = require('./models/Users')
+const DeliveryModel = require('./models/Deliveries')
 
 const cors = require("cors");
 
@@ -11,6 +12,13 @@ app.use(express.json());
 app.use(cors())
 
 mongoose.connect("mongodb+srv://urba_storage:sanfrancisco@endmodels.rytvtoj.mongodb.net/models?retryWrites=true&w=majority")
+
+app.use('/login', (req,res) => {
+    res.send({
+        token: 'test123'
+    });
+    
+});
 
 app.get("/getUsers", (req, res) => {
     UserModel.find({}, (err, result) => {

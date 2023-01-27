@@ -1,5 +1,6 @@
+const mongoose = require('mongoose')
 const Users = require("../models/Users")
-const Units = require("./Unit")
+const Units = require("../models/Unit")
 
 const ProviderSchema = new mongoose.Schema({
     name: {
@@ -29,7 +30,7 @@ const ProviderSchema = new mongoose.Schema({
         required: true
     },
     photo: {
-        type: Image,
+        type: String,
         required: false
     }
     

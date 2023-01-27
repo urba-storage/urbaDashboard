@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './overall-list.scss'
 import { data } from '../../constants'
+import Axios from 'axios';
 
 const icons = [
     <i className='bx bx-receipt'></i>,
@@ -10,17 +11,32 @@ const icons = [
 ]
 
 const OverallList = () => {
+    const [overAllData,setOverAll]=useState(data);
+    useEffect(() => {
+            Axios.get("http://localhost:3001/getDelivery").then((response) => {
+                let newData=overAllData.overall.map((item)=>{
+                    if(item.title=='Orders'){
+                        item.value=response.data.length
+                    }
+                    return item;
+                })
+                setOverAll({overall:newData});
+            })
+            // Axios.get("http://localhost:3001/overalll").then((response) => {
+            //     setOverAll(response.data);
+            // })
+    },[])
     return (
         <ul className='overall-list'>
             {
-                data.overall.map((item, index) => (
+                overAllData.overall.map((item, index) => (
                     <li className="overall-list__item" key={`overall-${index}`}>
                         <div className="overall-list__item__icon">
                             {icons[index]}
                         </div>
                         <div className="overall-list__item__info">
                             <div className="title">
-                                {item.value}
+                                {item.value} 
                             </div>
                             <span>{item.title}</span>
                         </div>

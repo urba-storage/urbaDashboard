@@ -4,6 +4,8 @@ import './scss/App.scss'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Blank from './pages/Blank'
 import Dashboard from './pages/Dashboard'
+import Order from './pages/Orders'
+import Customer from './pages/Customers';
 import Login from './components/login/login';
 import MainLayout from './layout/MainLayout'
 
@@ -18,9 +20,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Dashboard />} />
-                    <Route path="orders" element={<Blank />} />
+                    <Route path="orders" element={<Order />} />
                     <Route path="products" element={<Blank />} />
-                    <Route path="customers" element={<Blank />} />
+                    <Route path="customers" element={<Customer />} />
                     <Route path="settings" element={<Blank />} />
                     <Route path="stats" element={<Blank />} />
                 </Route>

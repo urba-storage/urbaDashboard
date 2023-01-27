@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+// const Provider = require("../models/Providers")
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -12,15 +13,17 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
-       }
-    // },
-    // provider: {
-    //     type: ProviderSchema,
-    //     required: false
-    // }
+       },
+    phoneno: {
+        type: String,
+        required: false
+    },
+    provider: {
+        type: String,
+        required: false
+    }
     
 })
 
-const UserModel = mongoose
-
-module.exports = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("users", UserSchema)
+module.exports = UserModel

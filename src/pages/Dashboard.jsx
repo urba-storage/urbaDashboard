@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import Axios from "axios";
 import { Bar } from 'react-chartjs-2'
 import Box from '../components/box/Box'
 import DashboardWrapper, { DashboardWrapperMain, DashboardWrapperRight } from '../components/dashboard-wrapper/DashboardWrapper'
@@ -28,6 +29,41 @@ ChartJS.register(
 )
 
 const Dashboard = () => {
+    const [overAllData,setOverAll]=useState(data);
+    useEffect(() => {
+            Axios.get("http://localhost:3001/getDelivery").then((response) => {
+                let newData=overAllData.summary.map((items)=>{
+                    if(items.title=='Orders'){
+                        items.value=response.data.length
+                        items.percent=49
+                        items.subtitle="Total Deliveries made from app"
+                    }
+                    else if(items.title=='Sales'){
+                        items.value = 23
+                        items.percent=2
+                        items.subtitle="Percentage increase from last week"
+                    }
+                    else if(items.title=='Visits'){
+                        items.value = 36
+                        items.percent=0
+                        items.subtitle="Number of storage units"
+                    }
+                    else if(items.title=='Revenue'){
+                        items.value = 2988
+                        items.percent=6
+                        items.subtitle="Percentage increase from last week"
+                    }
+                    return items;
+                })
+                setOverAll({overall:newData});
+            })
+            // Axios.get("http://localhost:3001/overalll").then((response) => {
+            //     setOverAll(response.data);
+            // })
+    },[])
+
+
+
     return (
         <DashboardWrapper>
             <DashboardWrapperMain>
@@ -35,7 +71,7 @@ const Dashboard = () => {
                     <div className="col-8 col-md-12">
                         <div className="row">
                             {
-                                data.summary.map((item, index) => (
+                                overAllData.overall.map((item, index) => (
                                     <div key={`summary-${index}`} className="col-6 col-md-6 col-sm-12 mb">
                                         <SummaryBox item={item} />
                                     </div>
