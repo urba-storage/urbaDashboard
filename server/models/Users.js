@@ -22,7 +22,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     }
-    
 })
 
 const UserModel = mongoose.model("users", UserSchema)

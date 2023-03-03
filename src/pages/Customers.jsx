@@ -1,48 +1,58 @@
-import React from 'react'
-//date time to from status PackingHelp
+import React, { useState, useEffect } from 'react';
+import CustomerProfilePage from './Profile';
+
+
 const Customer = () => {
-  var heading = ["Name", "Email", "Phone Number", "Unit"];
-  var body = [
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"],
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"],
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"],
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"],
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"],
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"],
-    ["Walter White", "heisenberg@polloshermanos.com", "510-878-9834", "#243"],
-    ["Gustavo Fring", "gusfring@polloshermanos.com", "510-345-6787", "#128"]
-  ];
-    return (
-        <div>
-      <table style={{borderCollapse: 'collapse', 
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/getUsers')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  // const handleRowClick = (user) => {
+  //   setSelectedUser(user);
+  // };
+  const handleRowClick = (user) => {
+    setSelectedUser(user);
+    //history.push(`/profile?id=${user.id}`);
+  };
+  
+
+  const heading = ["Name", "Email"];
+  const body = users.map((user) => [user.name, user.email]);
+
+  return (
+    <div>
+      <table style={{borderCollapse: 'collapse',
                       margin: '25px 0',
                       fontSize: '0.9em',
                       fontFamily: 'sansSerif',
                       minWidth: '400px',
-                      boxShadow: '0 0 20px rgba(0, 0, 0, 0.15)' 
+                      boxShadow: '0 0 20px rgba(0, 0, 0, 0.15)'
                       }}>
         <thead>
           <tr style={{backgroundColor: '#009879',
                       color: '#ffffff',
                       textAlign: 'left'}}>
             {heading.map((head) => (
-              <th style={{padding: '24px 60px'}}>
+              <th key={head} style={{padding: '24px 60px'}}>
                 {head}
               </th>
             ))}
           </tr>
         </thead>
         <tbody style={{borderBottom: '1px solid #dddddd'}}>
-          {body.map((row) => (
-            <tr style={{borderBottom: '1px'}}>
-              {row.map((val) => (
-                <td style={{padding: '24px 60px'}}>
+          {body.map((row, index) => (
+            <tr key={index} style={{borderBottom: '1px'}}>
+              <td style={{padding: '24px 60px'}}>
+                <a href={'#'} onClick={() => handleRowClick(users[index])}>{row[0]}</a>
+              </td>
+              {row.slice(1).map((val, i) => (
+                <td key={i} style={{padding: '24px 60px'}}>
                   {val}
                 </td>
               ))}
@@ -50,9 +60,9 @@ const Customer = () => {
           ))}
         </tbody>
       </table>
+      {selectedUser && <CustomerProfilePage users={users} />}
     </div>
   );
-}
+};
 
-
-export default Customer
+export default Customer;

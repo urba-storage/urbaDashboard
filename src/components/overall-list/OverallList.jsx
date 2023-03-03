@@ -18,6 +18,15 @@ const OverallList = () => {
                     if(item.title=='Orders'){
                         item.value=response.data.length
                     }
+                    else if(item.title=='Customers') {
+                        item.value=20
+                    }
+                    else if(item.title=='Products') {
+                        item.value=25
+                    }
+                    else if(item.title=='Revenue') {
+                        item.value=2988
+                    }
                     return item;
                 })
                 setOverAll({overall:newData});

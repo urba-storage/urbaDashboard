@@ -28,21 +28,6 @@ ChartJS.register(
 )
 
 const SummaryBox = ({ item }) => {
-    const [overAllData,setOverAll]=useState(data);
-    useEffect(() => {
-            Axios.get("http://localhost:3001/getDelivery").then((response) => {
-                let newData=overAllData.overall.map((item)=>{
-                    if(item.title=='Orders'){
-                        item.value=response.data.length
-                    }
-                    return item;
-                })
-                setOverAll({overall:newData});
-            })
-            // Axios.get("http://localhost:3001/overalll").then((response) => {
-            //     setOverAll(response.data);
-            // })
-    },[])
 
     return (
         <Box>

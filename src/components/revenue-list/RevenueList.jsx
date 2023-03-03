@@ -1,9 +1,36 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import Axios from 'axios'
 import { data } from '../../constants'
 import './revenue-list.scss'
 import ProgressBar from '../progressbar/ProgressBar'
 
 const RevenueList = () => {
+    const [revenueList, setRevenue] = useState(data);
+    useEffect(() => {
+    Axios.get("http://localhost:3001/getDelivery").then((response) => {
+        let newData=revenueList.revenueByChannel.map((items)=>{
+            if(items.title=='Direct') {
+                items.value=65
+            }
+            else if(items.title=='External search') {
+                items.value=10
+            }
+            else if(items.title=='Referal') {
+                items.value=10
+            }
+            else if(items.title=='Social') {
+                items.value=15
+            }
+            return items;
+        })
+
+        setRevenue({revenueByChannel:newData});
+    })
+    // Axios.get("http://localhost:3001/overalll").then((response) => {
+    //     setOverAll(response.data);
+    // })
+},[])
+
     return (
         <ul className='revenue-list'>
             {

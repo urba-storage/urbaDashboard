@@ -28,20 +28,24 @@ const data = {
             percent: 38
         },
         {
-            title: 'Visits',
+            title: 'Customers',
             subtitle: 'Total visits today',
             value: '',
             percent: 55
         }
     ],
-    revenueSummary: {
-        title: 'Revenue',
-        value: '$678',
-        chartData: {
-            labels: ['May', 'Jun', 'July', 'Aug', 'May', 'Jun', 'July', 'Aug'],
-            data: [300, 300, 280, 380, 200, 300, 280, 350]
+    revenueSummary: [
+        {
+            title: 'Revenue',
+            value: '678',
+            chartData: {
+                labels: ['May', 'Jun', 'July', 'Aug', 'May', 'Jun', 'July', 'Aug'],
+                data: [300, 300, 280, 380, 200, 300, 280, 350]
+            }
         }
-    },
+
+    ],
+
     overall: [
         {
             value: '',
@@ -78,10 +82,13 @@ const data = {
             value: 30
         }
     ],
-    revenueByMonths: {
-        labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
-        data: [250, 200, 300, 280, 100, 220, 310, 190, 200, 120, 250, 350]
-    }
+    revenueByMonths: 
+        {
+            labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+            data: [250, 200, 300, 280, 100, 220, 310, 190, 200, 120, 250, 350]
+
+        }
+
 }
 
 export default data

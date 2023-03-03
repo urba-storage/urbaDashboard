@@ -24,6 +24,12 @@ const sidebarNav = [
         text: 'Customers'
     },
     {
+        link: '/profile',
+        section: 'profile',
+        icon: <i className='bx bx-user'></i>,
+        text: 'Profiles'
+    },
+    {
         link: '/stats',
         section: 'stats',
         icon: <i className='bx bx-line-chart'></i>,
